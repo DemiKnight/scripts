@@ -1,0 +1,12 @@
+#!/usr/bin/env -S scala-cli shebang -S 3 --toolkit default
+
+//> using scala 3.4.0
+//> using toolkit default
+
+val branchCall = os.proc("git", "branch", "--show-current").call()
+val branchName = branchCall.out.text().trim
+
+println(s"Branch $branchName, copying to clipboard")
+
+os.proc("pbcopy").call(stdin = branchName)
+
